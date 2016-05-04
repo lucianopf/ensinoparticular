@@ -34,4 +34,18 @@ foodMeApp.controller('LoginController',
       $scope.$digest();
     };
 
+    function togetherSetup(){
+      TogetherJS.config("dontShowClicks", true);
+      TogetherJS.config("findRoom", $scope.username);
+      TogetherJS.config("suppressJoinConfirmation", true);
+      TogetherJS.config("youtube", true);
+      TogetherJS.config("getUserName", function () {return $scope.username;} );
+
+    }
+
+    $scope.togetherInit = function(){
+      togetherSetup();
+      TogetherJS(this);
+    }
+
 });
