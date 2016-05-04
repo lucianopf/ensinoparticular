@@ -14,8 +14,8 @@
     <div class="navbar-inner">
       <a class="brand" href="#/">Ensino Particular</a>
       <ul class="nav">
-        <li ng-class="{active: routeIs('/')}"><a href="#/">Home</a></li>
-        <li ng-class="{active: routeIs('/how-it-works')}"><a href="#/how-it-works">Login</a></li>
+        <li ng-class="{active: routeIs('/')}"><a href="#/">Login</a></li>
+        <!-- <li ng-class="{active: routeIs('/how-it-works')}"><a href="#/how-it-works">Login</a></li> -->
       </ul>
 
       <ul class="nav pull-right">
@@ -34,22 +34,6 @@
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular-resource.min.js"></script>
 -->
 <script src="lib/parse.min.js"></script>
-<script>
-Parse.initialize("app_password");
-Parse.serverURL = 'https://services-users.herokuapp.com/parse'
-
-
-Parse.User.logIn("my name", "my pass", {
-  success: function(user) {
-    console.log(user);
-  },
-  error: function(user, error) {
-    // The login failed. Check error to see why.
-  }
-});
-</script>
-
-
 <script src="lib/angular/angular.js"></script>
 <script src="lib/angular/angular-resource.js"></script>
 <script src="js/app.js"></script>
@@ -57,7 +41,7 @@ Parse.User.logIn("my name", "my pass", {
 <script src="js/controllers/CustomerController.js"></script>
 <script src="js/controllers/MenuController.js"></script>
 <script src="js/controllers/NavbarController.js"></script>
-<script src="js/controllers/RestaurantsController.js"></script>
+<script src="js/controllers/LoginController.js"></script>
 <script src="js/controllers/ThankYouController.js"></script>
 <script src="js/directives/fmDeliverTo.js"></script>
 <script src="js/directives/fmCheckboxList.js"></script>
