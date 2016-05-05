@@ -34,18 +34,29 @@ foodMeApp.controller('LoginController',
       $scope.$digest();
     };
 
-    function togetherSetup(){
+    function togetherSetup(local){
       TogetherJS.config("dontShowClicks", true);
-      TogetherJS.config("findRoom", $scope.username);
+      TogetherJS.config("findRoom", local);
       TogetherJS.config("suppressJoinConfirmation", true);
       TogetherJS.config("youtube", true);
       TogetherJS.config("getUserName", function () {return $scope.username;} );
 
-    }
+    };
 
-    $scope.togetherInit = function(){
-      togetherSetup();
+    $scope.togetherInit = function(local){
+      if(TogetherJS.running)
+        TogetherJS();
+      sessionStorage.removeItem('togetherjs-session.status');
+      togetherSetup(local);
       TogetherJS(this);
-    }
+    };
+
+    $scope.togetherLocal = function(){
+      $scope.togetherInit($scope.username);
+    };
+
+    $scope.togetherShared = function(){
+      $scope.togetherInit('Room-1');
+    };
 
 });
