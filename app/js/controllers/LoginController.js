@@ -43,6 +43,40 @@ foodMeApp.controller('LoginController',
 
     };
 
+    $scope.togetherNewSession = function(name, cb){
+      var TogetherRoom = Parse.Object.extend("TogetherRooms");
+      var togetherRoom = new TogetherRoom();
+      togetherRoom.set("name", name);
+      togetherRoom.set("active", true);
+      togetherRoom.save(null, {
+        success: function(togetherRoom) {
+          console.log(togetherRoom);
+          cb();
+        },
+        error: function(togetherRoom, error) {
+          console.log(togetherRoom, error);
+        }
+      });
+    }
+
+    $scope.togetherCheckSession = function(name, cb){
+      var TogetherRoom = Parse.Object.extend("TogetherRooms");
+      var query = new Parse.Query(TogetherRoom);
+      query.equalTo("name", name);
+      query.equalTo("active", true);
+      var exists = false;
+      query.find({
+        success: function(results) {
+          if(results.length)
+            exists = true;
+          cb(exists, name);
+        },
+        error: function(error) {
+          cb(exists, error);
+        }
+      });
+    }
+
     $scope.togetherInit = function(local){
       if(TogetherJS.running)
         TogetherJS();
@@ -51,8 +85,20 @@ foodMeApp.controller('LoginController',
       TogetherJS(this);
     };
 
+    $scope.togetherDecideWheterJoin = function(exists, name){
+      if(exists){
+        $scope.togetherInit(name);
+      }else{
+        $scope.togetherNewSession(name,
+          $scope.togetherInit
+        );
+      }
+    };
+
     $scope.togetherLocal = function(){
-      $scope.togetherInit($scope.username);
+      $scope.togetherCheckSession($scope.username,
+        $scope.togetherDecideWheterJoin
+      );
     };
 
     $scope.togetherShared = function(){
