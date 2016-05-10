@@ -13,9 +13,9 @@ foodMeApp.config(function($routeProvider) {
         controller: 'MenuController',
         templateUrl: 'views/menu.html'
       }).
-      when('/checkout', {
-        controller: 'CheckoutController',
-        templateUrl: 'views/checkout.html'
+      when('/assessments', {
+        controller: 'AssessmentsController',
+        templateUrl: 'views/assessments.html'
       }).
       when('/thank-you', {
         controller: 'ThankYouController',
