@@ -4,8 +4,6 @@ foodMeApp.controller('LoginController',
     $scope.username = "";
     $scope.password = "";
     $scope.logged = false;
-    $scope.path = $location.$$path;
-    $scope.session = null;
 
     Parse.initialize("app_password");
     Parse.serverURL = 'https://services-users.herokuapp.com/parse'
@@ -14,17 +12,18 @@ foodMeApp.controller('LoginController',
       $scope.logged = true;
       var session = JSON.parse(localStorage.getItem('Parse/app_password/currentUser'));
       $scope.username = session.username;
-      $scope.session = session;
     }
+
     $scope.login = function(){
       localStorage.removeItem('Parse/app_password/currentUser');
       Parse.User.logIn($scope.username, $scope.password, {
         success: function(user) {
           $scope.logged = true;
           $scope.$digest();
+          console.log(user);
         },
         error: function(user, error) {
-          alert("Falha ao logar, senha ou nome de usuário incorretos.");
+          alert("Falha ao logar");
         }
       });
     };
@@ -44,40 +43,6 @@ foodMeApp.controller('LoginController',
 
     };
 
-    $scope.togetherNewSession = function(name, cb){
-      var TogetherRoom = Parse.Object.extend("TogetherRooms");
-      var togetherRoom = new TogetherRoom();
-      togetherRoom.set("name", name);
-      togetherRoom.set("active", true);
-      togetherRoom.save(null, {
-        success: function(togetherRoom) {
-          console.log(togetherRoom);
-          cb();
-        },
-        error: function(togetherRoom, error) {
-          console.log(togetherRoom, error);
-        }
-      });
-    }
-
-    $scope.togetherCheckSession = function(name, cb){
-      var TogetherRoom = Parse.Object.extend("TogetherRooms");
-      var query = new Parse.Query(TogetherRoom);
-      query.equalTo("name", name);
-      query.equalTo("active", true);
-      var exists = false;
-      query.find({
-        success: function(results) {
-          if(results.length)
-            exists = true;
-          cb(exists, name);
-        },
-        error: function(error) {
-          cb(exists, error);
-        }
-      });
-    }
-
     $scope.togetherInit = function(local){
       if(TogetherJS.running)
         TogetherJS();
@@ -86,25 +51,12 @@ foodMeApp.controller('LoginController',
       TogetherJS(this);
     };
 
-    $scope.togetherDecideWheterJoin = function(exists, name){
-      if(exists){
-        $scope.togetherInit(name);
-      }else{
-        $scope.togetherNewSession(name,
-          $scope.togetherInit
-        );
-      }
-    };
-
     $scope.togetherLocal = function(){
-      $scope.togetherCheckSession($scope.username,
-        $scope.togetherDecideWheterJoin
-      );
+      $scope.togetherInit($scope.username);
     };
 
     $scope.togetherShared = function(){
       $scope.togetherInit('Room-1');
     };
-
 
 });

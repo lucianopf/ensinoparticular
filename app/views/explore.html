@@ -1,0 +1,29 @@
+<div class="row-fluid">
+  <br/>
+  <div class="container">
+    <div ng-show="logged">
+      <ul class="actions fit small">
+        <li>
+          <a ng-class="{special: path == '/'}" href="#/" class="button alt fit small">Início</a>
+        </li>
+        <li>
+          <a ng-class="{special: path == '/explore'}" href="#/explore" class="button alt fit small">Buscar Professores</a>
+        </li>
+        <li>
+          <a ng-class="{special: path == '/classroom'}" href="#/classroom" class="button alt fit small">Sala de Aula</a>
+        </li>
+      </ul>
+      <form class="form-signout">
+        <h2 class="form-signin-heading">Explore {{username}}</h2>
+        <div class="btn-group-vertical">
+                    <a href="#" class="btn btn-primary" ng-click="togetherLocal()">TogetherJS Local</a>
+                    <a href="#" class="btn btn-primary" ng-click="togetherShared()">TogetherJS Compartilhado</a>
+        </div>
+        <br/><br/>
+        <ul class="actions">
+            <li><a class="button alt" type="submit" ng-click="logout()">Sign Out</a></li>
+        </ul>
+      </form>
+    </div>
+  </div>
+</div>
