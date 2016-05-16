@@ -1,0 +1,54 @@
+  <form name="form">
+    <div class="container fm-panel fm-checkout">
+      <h4>Assessments</h4>
+      <form class="form-horizontal">
+      <fieldset>
+      <!-- Form Name -->
+      <legend>Create a Question</legend>
+      <!-- Text input-->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="question">Question</label>
+        <div class="col-md-4">
+        <textarea id="question" name="question" placeholder="Type your question" required="" ng-model="question" class="form-control" rows="3" id="comment"></textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="subject">Subject</label>
+        <div class="col-md-4">
+        <input id="subject" name="subject" type="text" placeholder="Type your subject" class="form-control input-md" required="" ng-model="subject">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="answer">Add Answer</label>
+        <div class="col-md-4">
+        <input id="answer" name="answer" type="text" placeholder="Type your here to add an answer" class="form-control input-md" ng-model="answer">
+        </div>
+        <button id="add" name="add" class="btn btn-default" ng-click="addAnswer()">Add</button>
+      </div>
+
+      <!-- Multiple Radios -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="questions">Choose the correct answer</label>
+        <div class="col-md-4">
+          <div class="radio" ng-repeat="(key, answer) in answers" >
+              <input type="radio" name="questions" value="{{answer}}" ng-model="$parent.correct">
+              {{answer}}
+        	</div>
+        </div>
+      </div>
+
+
+      <!-- Button (Double) -->
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="confirm"></label>
+        <div class="col-md-8">
+          <button id="confirm" name="confirm" class="btn btn-success" ng-click="saveQuestion()">Save Question</button>
+          <button id="forget" name="forget" class="btn btn-danger" ng-click="redefineFields()">Clear Question</button>
+        </div>
+      </div>
+
+      </fieldset>
+      </form>
+    </div>
+  </form>
+  

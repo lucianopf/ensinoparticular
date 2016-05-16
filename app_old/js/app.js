@@ -9,21 +9,13 @@ foodMeApp.config(function($routeProvider) {
         controller: 'LoginController',
         templateUrl: 'views/login.html'
       }).
-      when('/explore', {
-        controller: 'LoginController',
-        templateUrl: 'views/explore.html'
-      }).
-      when('/classroom', {
-        controller: 'LoginController',
-        templateUrl: 'views/classroom.html'
+      when('/menu/:restaurantId', {
+        controller: 'MenuController',
+        templateUrl: 'views/menu.html'
       }).
       when('/assessments', {
         controller: 'AssessmentsController',
         templateUrl: 'views/assessments.html'
-      }).
-      when('/signup', {
-        controller: 'SignupController',
-        templateUrl: 'views/signup.html'
       }).
       when('/thank-you', {
         controller: 'ThankYouController',

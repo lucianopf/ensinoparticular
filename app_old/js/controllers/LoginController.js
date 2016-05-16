@@ -4,8 +4,6 @@ foodMeApp.controller('LoginController',
     $scope.username = "";
     $scope.password = "";
     $scope.logged = false;
-    $scope.path = $location.$$path;
-    $scope.session = null;
 
     Parse.initialize("app_password");
     Parse.serverURL = 'https://services-users.herokuapp.com/parse'
@@ -14,17 +12,18 @@ foodMeApp.controller('LoginController',
       $scope.logged = true;
       var session = JSON.parse(localStorage.getItem('Parse/app_password/currentUser'));
       $scope.username = session.username;
-      $scope.session = session;
     }
+
     $scope.login = function(){
       localStorage.removeItem('Parse/app_password/currentUser');
       Parse.User.logIn($scope.username, $scope.password, {
         success: function(user) {
           $scope.logged = true;
           $scope.$digest();
+          console.log(user);
         },
         error: function(user, error) {
-          alert("Falha ao logar, senha ou nome de usuário incorretos.");
+          alert("Falha ao logar");
         }
       });
     };
@@ -59,6 +58,5 @@ foodMeApp.controller('LoginController',
     $scope.togetherShared = function(){
       $scope.togetherInit('Room-1');
     };
-
 
 });
