@@ -40,9 +40,10 @@
         <div class="4u 12u$(medium)" ng-hide="editUser">
           <h3>Usuário</h3>
           <ul class="alt">
-            <li>Nome de usuário: {{session.username}}</li>
-            <li>Email do usuário: {{session.email}}</li>
-            <li>Telefone do usuário: {{session.phone}}</li>
+            <li><label>Nome de usuário</label> {{session.username}}</li>
+            <li><label>Email do usuário</label> {{session.email}}</li>
+            <li><label>Telefone do usuário</label> {{session.phone}}</li>
+            <li><label>Descrição do usuário</label> {{session.description}}</li>
           </ul>
           <button class="button special fit small" ng-click="editUserInfo()">Alterar Dados</button>
         </div>
@@ -69,6 +70,10 @@
               <div class="12u 12u$(xsmall)">
                 <label for="adress">Endereço do usuário</label>
                 <input type="text" name="adress" ng-model='adress' />
+              </div>
+              <div class="12u$">
+                <label for="description">Breve descrição do usuário</label>
+                <textarea name="description" rows="3" ng-model='description'></textarea>
               </div>
             </li>
           </ul>

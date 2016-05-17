@@ -10,6 +10,7 @@ foodMeApp.controller('LoginController',
     $scope.session = null;
     $scope.editUser = false;
     $scope.adress = "";
+    $scope.description = "";
     $scope.teachers = [];
 
     $scope.test = "";
@@ -122,6 +123,7 @@ foodMeApp.controller('LoginController',
       $scope.email = $scope.session.email;
       $scope.lat = $scope.session.geo_lat;
       $scope.long = $scope.session.geo_long;
+      $scope.description = $scope.session.description;
       reGeocode($scope.lat,$scope.long)
         .then(function(res){
           $scope.adress = res[0].place_name;
@@ -135,6 +137,7 @@ foodMeApp.controller('LoginController',
       $scope.adress = "";
       $scope.editUser = false;
       $scope.adress = "";
+      $scope.description = "";
     };
 
     $scope.updateUser = function(){
@@ -145,6 +148,7 @@ foodMeApp.controller('LoginController',
           user.set("email", $scope.email);
           user.set("phone", $scope.phone);
           user.set("username", $scope.username);
+          user.set("description", $scope.description);
           findGeocode($scope.adress)
             .then(function(res){
               user.set("geo_lat", res[0].center[0]);
@@ -167,13 +171,6 @@ foodMeApp.controller('LoginController',
     };
 
     $scope.initMap = function(){
-      // mapboxgl.accessToken = 'pk.eyJ1IjoibHVjaWFub3BmIiwiYSI6ImEyNTFmYTRkNTA5NjFkZWU3Njk5MDczNDNkMGYxODM1In0.InSeGw4XTNjHQx_bnkXalQ';
-      // var map = new mapboxgl.Map({
-      //     container: 'map', // container id
-      //     style: 'mapbox://styles/lucianopf/cioas0pbg004nagm89waja6sy', //stylesheet location
-      //     center: [-40.3042, -20.2934], // starting position
-      //     zoom: 13 // starting zoom
-      // });
       L.mapbox.accessToken = 'pk.eyJ1IjoibHVjaWFub3BmIiwiYSI6ImEyNTFmYTRkNTA5NjFkZWU3Njk5MDczNDNkMGYxODM1In0.InSeGw4XTNjHQx_bnkXalQ';
       var map = L.mapbox.map('map', 'mapbox.streets')
           .setView([-20.288335, -40.289979], 14);

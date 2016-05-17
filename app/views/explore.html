@@ -18,15 +18,30 @@
           <h3>Buscar Professores</h3>
           <ul class="alt" class="5u 12u$(medium)">
             <li class="teacher_list" ng-repeat="teacher in teachers">
-              <h4 ng-bind="teacher.attributes.username"></h4>
+              <div class="row">
+              <div class="4u">
+                <section class="special">
+                  <a href="#" class="image fit"><img src="https://randomuser.me/api/portraits/men/{{$index}}.jpg" alt=""></a>
+                </section>
+              </div>
+
+  						<div class="8u">
+  							<section class="special">
+  								<h4 ng-bind="teacher.attributes.username"></h4>
+  								<p style="font-size:15px">{{teacher.attributes.description | limitTo:10}}</p>
+  							</section>
+  						</div>
+
+              </div>
                 <div ng-repeat="language in teacher.attributes.languages">
                     <button class="button alt small fit" ng-click="scheduleClass(teacher.id,language)">Agendar aula de {{language}}</button>
                 </div>
             </li>
           </ul>
         </div>
-        <div class="7u$ 12u$(medium)">
-          <div id='map' style="{width:100px}"></div>
+        <div class="7u 12u$(medium)">
+          <div id='map' class=" fit"></div>
+
         </div>
       </div>
     </div>

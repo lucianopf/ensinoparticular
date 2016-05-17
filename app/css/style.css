@@ -1086,8 +1086,15 @@
 			color: #bbb;
 		}
 
-#map { top:0; bottom:0; width:540px; height: 500px}
+#map {
+	top:0; bottom:0;height: 800px
+}
 
 .teacher_list:hover{
-			
+
+}
+
+.image-head{
+	margin-bottom: 20px;
+	border-radius: 6px;
 }
