@@ -20,7 +20,7 @@
             <li class="teacher_list" ng-repeat="teacher in teachers">
               <h4 ng-bind="teacher.attributes.username"></h4>
                 <div ng-repeat="language in teacher.attributes.languages">
-                  <h6 ng-bind="language"></h6>
+                    <button class="button alt small fit" ng-click="scheduleClass(teacher.id,language)">Agendar aula de {{language}}</button>
                 </div>
             </li>
           </ul>

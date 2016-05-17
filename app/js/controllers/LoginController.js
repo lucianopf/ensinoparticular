@@ -12,6 +12,8 @@ foodMeApp.controller('LoginController',
     $scope.adress = "";
     $scope.teachers = [];
 
+    $scope.test = "";
+
     Parse.initialize("app_password");
     Parse.serverURL = 'https://services-users.herokuapp.com/parse'
 
@@ -26,6 +28,7 @@ foodMeApp.controller('LoginController',
       Parse.User.logIn($scope.username, $scope.password, {
         success: function(user) {
           $scope.logged = true;
+          $scope.session = JSON.parse(localStorage.getItem('Parse/app_password/currentUser'));
           $scope.$digest();
         },
         error: function(user, error) {
@@ -112,6 +115,7 @@ foodMeApp.controller('LoginController',
     };
 
     $scope.editUserInfo = function(){
+      $scope.session = JSON.parse(localStorage.getItem('Parse/app_password/currentUser'));
       $scope.editUser = !$scope.editUser;
       $scope.username = $scope.session.username;
       $scope.phone = $scope.session.phone;
@@ -237,6 +241,9 @@ foodMeApp.controller('LoginController',
       });
     };
 
-
+    $scope.scheduleClass = function(teacherId, language){
+      $scope.test = "Working fine";
+      console.log("Aqui",teacherId  ,language);
+    }
 
 });
