@@ -35,21 +35,51 @@
         </li>
       </ul>
       <h2 class="form-signin-heading">Bem vindo <span ng-show="session.teacher">professor</span> {{username}}</h2>
-      
+
       <div class="row">
-        <div class="4u 12u$(medium)">
+        <div class="4u 12u$(medium)" ng-hide="editUser">
           <h3>Usuário</h3>
           <ul class="alt">
             <li>Nome de usuário: {{session.username}}</li>
             <li>Email do usuário: {{session.email}}</li>
             <li>Telefone do usuário: {{session.phone}}</li>
           </ul>
-          <a href="#" class="button special fit small">Alterar Dados</a>
+          <button class="button special fit small" ng-click="editUserInfo()">Alterar Dados</button>
+        </div>
+        <div class="4u 12u$(medium)" ng-show="editUser">
+          <h3>Editar Usuário</h3>
+          <ul class="alt">
+            <li>
+              <div class="12u 12u$(xsmall)">
+                <label for="username">Nome de usuário</label>
+                <input type="text" name="username" ng-model='username' />
+              </div>
+            </li>
+            <li>
+              <div class="12u 12u$(xsmall)">
+                <label for="email">Email do usuário</label>
+                <input type="text" name="email" ng-model='email' />
+              </div>
+            </li>
+            <li>
+              <div class="12u 12u$(xsmall)">
+                <label for="phone">Telefone do usuário</label>
+                <input type="text" name="phone" ng-model='phone' />
+              </div>
+              <div class="12u 12u$(xsmall)">
+                <label for="adress">Endereço do usuário</label>
+                <input type="text" name="adress" ng-model='adress' />
+              </div>
+            </li>
+          </ul>
+          <ul class="actions fit">
+            <li><button href="#" class="button special small fit" ng-click="updateUser()">Salvar</button></li>
+            <li><button class="button small fit" ng-click="cancelEdit()">Cancelar</button></li>
+          </ul>
         </div>
         <div class="8u$ 12u$(medium)">
           <h3>Compromissos</h3>
           <ul class="alt">
-            <li>Tipo - Descrição completa e geral... <a href="#{{path}}" class="button special small">Ação Positiva</a> <a href="#{{path}}" class="button alt small">Ação Neutra</a>  <a href="#{{path}}" class="button alt small disabled">Ação Negativa</a></li>
             <li>Tipo - Descrição completa e geral... <a href="#{{path}}" class="button special small">Ação Positiva</a> <a href="#{{path}}" class="button alt small">Ação Neutra</a>  <a href="#{{path}}" class="button alt small disabled">Ação Negativa</a></li>
             <li>Tipo - Descrição completa e geral... <a href="#{{path}}" class="button special small">Ação Positiva</a> <a href="#{{path}}" class="button alt small">Ação Neutra</a>  <a href="#{{path}}" class="button alt small disabled">Ação Negativa</a></li>
             <li>Tipo - Descrição completa e geral... <a href="#{{path}}" class="button special small">Ação Positiva</a> <a href="#{{path}}" class="button alt small">Ação Neutra</a>  <a href="#{{path}}" class="button alt small disabled">Ação Negativa</a></li>

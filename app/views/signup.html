@@ -14,7 +14,11 @@
         </div>
         <div class="form-group">
           <label for="inputTelephone" class="sr-only">Telefone</label>
-          <input type="email" id="inputTelephone" class="form-control input-lg" placeholder="Digite o telefone com DDD" required="" autofocus="" ng-model="telephone">
+          <input type="text" id="inputTelephone" class="form-control input-lg" placeholder="Digite o telefone com DDD" required="" autofocus="" ng-model="telephone">
+        </div>
+        <div class="form-group">
+          <label for="inputAdress" class="sr-only">Endereço</label>
+          <input type="text" id="inputAdress" class="form-control input-lg" placeholder="Ex: Avenida Antonio Borges 522, Vitoria, Espirito Santo" required="" autofocus="" ng-model="adress">
         </div>
         <div class="form-group">
           <label for="inputPassword" class="sr-only">Senha</label>
@@ -25,6 +29,24 @@
           <input type="password" id="inputRePassword" class="form-control input-lg" placeholder="Digite novamente sua senha" required="" ng-model="re_password">
         </div>
         <br/>
+        <h3>Línguas</h3>
+        <div class="form-group">
+          <input type="checkbox" id="inputEnglish" name="inputEnglish" ng-model="lang_english">
+          <label for="inputEnglish">Inglês</label>
+        </div>
+        <div class="form-group">
+          <input type="checkbox" id="inputSpanish" name="inputSpanish" ng-model="lang_spanish">
+          <label for="inputSpanish">Espanhol</label>
+        </div>
+        <div class="form-group">
+          <input type="checkbox" id="inputFrench" name="inputFrench" ng-model="lang_french">
+          <label for="inputFrench">Françês</label>
+        </div>
+        <div class="form-group">
+          <input type="checkbox" id="inputDeutch" name="inputDeutch" ng-model="lang_deutch">
+          <label for="inputDeutch">Alemão</label>
+        </div>
+        <hr/>
         <div class="form-group">
           <input type="checkbox" id="inputTeacher" name="inputTeacher" ng-model="teacher">
           <label for="inputTeacher">É um professor?</label>

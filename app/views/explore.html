@@ -13,17 +13,22 @@
           <a ng-class="{special: path == '/classroom'}" href="#/classroom" class="button alt fit small">Sala de Aula</a>
         </li>
       </ul>
-      <form class="form-signout">
-        <h2 class="form-signin-heading">Explore {{username}}</h2>
-        <div class="btn-group-vertical">
-                    <a href="#" class="btn btn-primary" ng-click="togetherLocal()">TogetherJS Local</a>
-                    <a href="#" class="btn btn-primary" ng-click="togetherShared()">TogetherJS Compartilhado</a>
+      <div class="row">
+        <div class="5u 12u$(medium)">
+          <h3>Buscar Professores</h3>
+          <ul class="alt" class="5u 12u$(medium)">
+            <li class="teacher_list" ng-repeat="teacher in teachers">
+              <h4 ng-bind="teacher.attributes.username"></h4>
+                <div ng-repeat="language in teacher.attributes.languages">
+                  <h6 ng-bind="language"></h6>
+                </div>
+            </li>
+          </ul>
         </div>
-        <br/><br/>
-        <ul class="actions">
-            <li><a class="button alt" type="submit" ng-click="logout()">Sign Out</a></li>
-        </ul>
-      </form>
+        <div class="7u$ 12u$(medium)">
+          <div id='map' style="{width:100px}"></div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
