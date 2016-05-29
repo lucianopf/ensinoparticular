@@ -1,0 +1,7 @@
+{
+  "name": "Ensino Particular",
+  "short_name": "EnsinoParticular",
+  "start_url": "/",
+  "display": "standalone",
+  "gcm_sender_id": "778070181765"
+}
