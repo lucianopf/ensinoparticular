@@ -34,7 +34,7 @@
 
               </div>
                 <div ng-repeat="language in teacher.attributes.languages">
-                    <button class="button alt small fit" ng-click="scheduleClass(teacher.id,language)">Agendar aula de {{language}}</button>
+                    <button class="button alt small fit" ng-click="scheduleClass(teacher.id,language)" data-toggle="modal" data-target="#calendar-prof">Agendar aula de {{language}}</button>
                 </div>
             </li>
           </ul>
@@ -43,6 +43,24 @@
           <div id='map' class=" fit"></div>
 
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="calendar-prof" tabindex="-1" style="z-index:10001">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Nome professor</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="button special small fit" data-dismiss="modal">Marcar</button>
+        <button type="button" class="button small fit" data-dismiss="modal">Cancelar</button>
       </div>
     </div>
   </div>
