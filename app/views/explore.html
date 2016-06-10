@@ -17,7 +17,7 @@
         <div class="5u 12u$(medium)">
           <h3>Buscar Professores</h3>
           <ul class="alt" class="5u 12u$(medium)">
-            <li class="teacher_list" ng-repeat="teacher in teachers">
+            <li class="teacher_list" ng-repeat="teacher in teachers" id="{{teacher.id}}">
               <div class="row">
               <div class="4u">
                 <section class="special">
@@ -34,7 +34,7 @@
 
               </div>
                 <div ng-repeat="language in teacher.attributes.languages">
-                    <button class="button alt small fit" ng-click="scheduleClass(teacher.id,language)" data-toggle="modal" data-target="#calendar-prof">Agendar aula de {{language}}</button>
+                    <button class="button alt small fit" ng-click="scheduleClass(teacher.attributes,language, teacher.id)" data-toggle="modal" data-target="#calendar-prof">Agendar aula de {{language}}</button>
                 </div>
             </li>
           </ul>
@@ -53,12 +53,57 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Nome professor</h4>
+        <h3 class="modal-title" ng-bind="teacherChosen"></h3>
       </div>
       <div class="modal-body">
+        <h4>Aula de <span ng-bind="languageChosen"></span></h4>
+        <form method="post" action="#">
+          <div class="row uniform">
+            <!-- SELECTS -->
+            <div class="6u 12u$(small)">
+              <label for="dia-select">Dia</label>
+              <div class="select-wrapper">
+                <select name="dia-select" id="dia-select" ng-model="dayChosen">
+                  <option value="segunda">Segunda</option>
+                  <option value="terca">Terça</option>
+                  <option value="quarta">Quarta</option>
+                  <option value="quinta">Quinta</option>
+                  <option value="sexta">Sexta</option>
+                  <option value="sabado">Sabado</option>
+                  <option value="domingo">Domingo</option>
+                </select>
+              </div>
+            </div>
+            <div class="6u 12u$(small)">
+              <label for="hour-select">Horario</label>
+              <div class="select-wrapper">
+                <select name="hour-select" id="hour-select" ng-model="chosenHour">
+                  <option ng-repeat="hour in availableHours" value="{{hour}}">{{hour}}</option>
+                </select>
+              </div>
+            </div>
+            <!-- RADIO -->
+            <div class="12u 12u$(small)" style="margin-top:20px">
+              <input type="radio" id="presencial" value="presencial" ng-model="tipoChosen" name="tipo" checked="">
+              <label for="presencial">Presencial</label>
+              <input type="radio" id="virtual" value="virtual" ng-model="tipoChosen" name="tipo">
+              <label for="virtual">Virtual</label>
+            </div>
+            <!-- RECURRENT -->
+            <div class="6u 12u$(small)">
+              <input type="checkbox" id="recurrent" name="recurrent" ng-model="recurrentChosen">
+              <label for="recurrent">Recorrente</label>
+            </div>
+            <!-- TEXTAREA -->
+            <div class="12u 12u$(small)">
+              <label for="observacoes">Observações</label>
+              <textarea name="observacoes" id="observacoes" rows="3" ng-model="eventObservations"></textarea>
+            </div>
+          </div>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="button special small fit" data-dismiss="modal">Marcar</button>
+        <button type="button" class="button special small fit" ng-click="saveEvent()">Marcar</button>
         <button type="button" class="button small fit" data-dismiss="modal">Cancelar</button>
       </div>
     </div>

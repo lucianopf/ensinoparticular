@@ -85,11 +85,9 @@
         <div class="8u$ 12u$(medium)">
           <h3>Compromissos</h3>
           <ul class="alt">
-            <li>Tipo - Descrição completa e geral... <a href="#{{path}}" class="button special small">Ação Positiva</a> <a href="#{{path}}" class="button alt small">Ação Neutra</a>  <a href="#{{path}}" class="button alt small disabled">Ação Negativa</a></li>
-            <li>Tipo - Descrição completa e geral... <a href="#{{path}}" class="button special small">Ação Positiva</a> <a href="#{{path}}" class="button alt small">Ação Neutra</a>  <a href="#{{path}}" class="button alt small disabled">Ação Negativa</a></li>
-            <li>Tipo - Descrição completa e geral... <a href="#{{path}}" class="button special small">Ação Positiva</a> <a href="#{{path}}" class="button alt small">Ação Neutra</a>  <a href="#{{path}}" class="button alt small disabled">Ação Negativa</a></li>
-            <li>Tipo - Descrição completa e geral... <a href="#{{path}}" class="button special small">Ação Positiva</a> <a href="#{{path}}" class="button alt small">Ação Neutra</a>  <a href="#{{path}}" class="button alt small disabled">Ação Negativa</a></li>
-            <li>Tipo - Descrição completa e geral... <a href="#{{path}}" class="button special small">Ação Positiva</a> <a href="#{{path}}" class="button alt small">Ação Neutra</a>  <a href="#{{path}}" class="button alt small disabled">Ação Negativa</a></li>
+            <li ng-repeat="task in tasks">
+              Aula - {{task.attributes.student}}
+            </li>
             <li>Tipo - Descrição completa e geral... <a href="#{{path}}" class="button special small">Ação Positiva</a> <a href="#{{path}}" class="button alt small">Ação Neutra</a>  <a href="#{{path}}" class="button alt small disabled">Ação Negativa</a></li>
           </ul>
         </div>

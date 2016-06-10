@@ -181,10 +181,9 @@ foodMeApp.controller('LoginController',
       users.find({
         success: function(results) {
           $scope.teachers = results;
-          console.log($scope.teachers);
           $scope.$apply();
           results.forEach(function(result){
-            L.mapbox.featureLayer({
+            var eu = L.mapbox.featureLayer({
                 type: 'Feature',
                 geometry: {
                     type: 'Point',
@@ -196,11 +195,18 @@ foodMeApp.controller('LoginController',
                 properties: {
                     title: result.attributes.username,
                     description: result.attributes.email,
+
                     'marker-size': 'large',
                     'marker-color': '#f55f55',
                     'marker-symbol': 'star'
                 }
-            }).addTo(map)
+            });
+            eu.on('click', function(){
+              $("html, body").animate({
+                scrollTop: $("#"+result.id).offset().top - 40
+              }, 500);
+            });
+            eu.addTo(map);
           })
         },
         error: function(error) {
@@ -208,7 +214,6 @@ foodMeApp.controller('LoginController',
         }
       });
     };
-
 
     if($scope.path == "/explore"){
       $scope.initMap();
@@ -238,9 +243,122 @@ foodMeApp.controller('LoginController',
       });
     };
 
-    $scope.scheduleClass = function(teacherId, language){
-      $scope.test = "Working fine";
-      console.log("Aqui",teacherId  ,language);
+    $scope.languageChosen = null;
+    $scope.teacherChosen = null;
+    $scope.dayChosen = null;
+    $scope.availableHours = null;
+    $scope.chosenHour = null;
+    $scope.teacherChosenId = null;
+    $scope.tipoChosen = 'presencial';
+    $scope.recurrentChosen = false;
+    $scope.eventObservations = null;
+
+    $scope.$watch('dayChosen', function() {
+      $scope.availableHours = getAvailableHours(8,19)
+      var Events = Parse.Object.extend("Events");
+      var events = new Parse.Query(Events);
+      var UserFind = Parse.Object.extend("User");
+      var user = new UserFind();
+      user.id = $scope.teacherChosenId;
+      try{
+        events.equalTo("teacher", user);
+      }catch(err){
+        // console.log(err)
+      }
+      events.equalTo("dia", $scope.dayChosen);
+      events.find({
+        success: function(results) {
+          var events = results.map(function(result){
+            return result.attributes;
+          })
+          var changeAfter = $scope.availableHours;
+          events.forEach(function(event){
+            changeAfter = changeAfter.filter(function(hora){
+              return hora != event.hora;
+            })
+          })
+          $scope.availableHours = changeAfter;
+          $scope.$apply();
+        },
+        error: function(error) {
+          console.log(error)
+        }
+      });
+    });
+
+
+    function getAvailableHours(begin, end){
+      var hours = []
+      for(var i = begin; i < end; i++){
+        hours.push(i + ":00 - " + (i+1)+":00")
+      }
+      return hours
     }
+
+    $scope.scheduleClass = function(teacher, language, teacherId){
+      $scope.languageChosen = language
+      $scope.teacherChosen = teacher.username
+      $scope.teacherChosenId = teacherId
+    }
+
+    $scope.saveEvent = function(){
+
+      var Event = Parse.Object.extend("Events");
+      var User = Parse.Object.extend("User");
+      var teacher = new User();
+      teacher.id = $scope.teacherChosenId
+      var student = new User();
+      student.id = $scope.session.objectId
+      var event = new Event();
+
+      event.set("done", false);
+      event.set("language", $scope.languageChosen);
+      event.set("state", "requested");
+      $scope.tipoChosen == "presencial" ? event.set('remote', false) : event.set('remote', true);
+      event.set('observations', $scope.eventObservations);
+      event.set('dia', $scope.dayChosen);
+      event.set('hora', $scope.chosenHour);
+      event.set('recurrent', $scope.recurrentChosen);
+      event.set('teacher', teacher);
+      event.set('student', student);
+      event.save(null, {
+        success: function(event) {
+          $scope.$apply(function(){
+            $location.url("/");
+            $('#calendar-prof').modal('hide');
+          })
+        },
+        error: function(event, error) {
+          alert('Failed to create new object, with error code: ' + error.message);
+        }
+      });
+    }
+
+    $scope.tasks = null;
+
+    var Events = Parse.Object.extend("Events");
+    var events = new Parse.Query(Events);
+    var UserFind = Parse.Object.extend("User");
+    var user = new UserFind();
+    user.id = $scope.session.objectId;
+    try{
+      events.equalTo("teacher", user);
+    }catch(err){
+      // console.log(err)
+    }
+    events.equalTo("done", false);
+    events.find({
+      success: function(results) {
+        // $scope.tasks = results.map(function(el){
+        //   return el.attributes;
+        // });
+        $scope.tasks = results;
+        console.log(results);
+        // $scope.apply();
+      },
+      error: function(error) {
+        console.log(error)
+      }
+    });
 
 });
