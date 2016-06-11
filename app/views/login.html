@@ -91,12 +91,12 @@
                 <td>Aula <span ng-show="task.attributes.remote">remota </span>de <span ng-bind="task.attributes.language"/>, na <span ng-bind="task.attributes.dia"/> de <span ng-bind="task.attributes.hora"/></td>
                 <td>
                   <ul class="icons">
-    								<li ng-show="!(task.attributes.state == 'refused')">
-                      <a class="icon fa-stack fa-lg" ng-show="(task.attributes.state == 'requested')">
+    								<li ng-show="!(task.attributes.state == 'refused')" ng-click="acceptEvent($index)">
+                      <a class="icon fa-stack fa-lg" ng-show="(task.attributes.state == 'requested') && (task.attributes.teacher.id == session.objectId)">
                           <i class="fa fa-square-o fa-stack-2x"></i>
                           <i class="fa fa-check fa-stack-1x"></i>
                       </a>
-                      <a class="icon fa-stack fa-lg" ng-show="(task.attributes.state == 'approved')">
+                      <a class="icon fa-stack fa-lg" ng-show="(task.attributes.state == 'approved')" ng-click="startEvent($index)">
                           <i class="fa fa-square-o fa-stack-2x"></i>
                           <i class="fa fa-play fa-stack-1x"></i>
                       </a>
@@ -107,7 +107,7 @@
                           <i class="fa fa-info fa-stack-1x"></i>
                       </a>
                     </li>
-    								<li ng-show="!(task.attributes.state == 'refused')">
+    								<li ng-show="!(task.attributes.state == 'refused')" ng-click="refuseEvent($index)">
                       <a href="#" class="icon fa-stack fa-lg">
                           <i class="fa fa-square-o fa-stack-2x"></i>
                           <i class="fa fa-times fa-stack-1x"></i>
@@ -153,8 +153,8 @@
         <p>{{eventChosen.attributes.observations}}.</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="button special small fit" ng-click="acceptEvent()" ng-show="eventChosen.attributes.state == 'requested'">Aceitar</button>
-        <button type="button" class="button special small fit" ng-click="acceptEvent()" ng-show="eventChosen.attributes.state == 'approved'">Iniciar</button>
+        <button type="button" class="button special small fit" ng-click="acceptEvent()" ng-show="eventChosen.attributes.state == 'requested' && (task.attributes.teacher.id == session.objectId)">Aceitar</button>
+        <button type="button" class="button special small fit" ng-click="startEvent()" ng-show="eventChosen.attributes.state == 'approved'">Iniciar</button>
         <button type="button" class="button small fit" ng-click="refuseEvent()" ng-show="eventChosen.attributes.state != 'refused'">Recusar</button>
         <button type="button" class="button alt small fit" data-dismiss="modal">Cancelar</button>
       </div>

@@ -374,7 +374,10 @@ foodMeApp.controller('LoginController',
       $scope.eventChosen = $scope.tasks[i];
     }
 
-    $scope.acceptEvent = function(){
+    $scope.acceptEvent = function(i){
+      if(i){
+        $scope.showTaskInfo(i);
+      }
       $scope.eventChosen.set("state","approved");
       $scope.eventChosen.save().then(
         function(res){
@@ -385,7 +388,10 @@ foodMeApp.controller('LoginController',
       )
     }
 
-    $scope.refuseEvent = function(){
+    $scope.refuseEvent = function(i){
+      if(i){
+        $scope.showTaskInfo(i);
+      }
       $scope.eventChosen.set("state","refused");
       $scope.eventChosen.set("done", true);
       $scope.eventChosen.save().then(
@@ -397,4 +403,11 @@ foodMeApp.controller('LoginController',
       )
     }
 
+    $scope.startEvent = function(i){
+      if(i){
+        $scope.showTaskInfo(i);
+      }
+      console.log("start event");
+    }
+    // console.log(session)
 });
