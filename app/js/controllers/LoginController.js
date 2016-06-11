@@ -12,6 +12,8 @@ foodMeApp.controller('LoginController',
     $scope.adress = "";
     $scope.description = "";
     $scope.teachers = [];
+    $scope.tasks = null;
+
 
     $scope.test = "";
 
@@ -334,31 +336,65 @@ foodMeApp.controller('LoginController',
       });
     }
 
-    $scope.tasks = null;
-
-    var Events = Parse.Object.extend("Events");
-    var events = new Parse.Query(Events);
-    var UserFind = Parse.Object.extend("User");
-    var user = new UserFind();
-    user.id = $scope.session.objectId;
-    try{
-      events.equalTo("teacher", user);
-    }catch(err){
-      // console.log(err)
-    }
-    events.equalTo("done", false);
-    events.find({
-      success: function(results) {
-        // $scope.tasks = results.map(function(el){
-        //   return el.attributes;
-        // });
-        $scope.tasks = results;
-        console.log(results);
-        // $scope.apply();
-      },
-      error: function(error) {
-        console.log(error)
+    if($scope.session){
+      var Events = Parse.Object.extend("Events");
+      var events = new Parse.Query(Events);
+      var studentEvents = new Parse.Query(Events);
+      var UserFind = Parse.Object.extend("User");
+      var user = new UserFind();
+      user.id = $scope.session.objectId;
+      try{
+        events.equalTo("teacher", user);
+        studentEvents.equalTo("student", user);
+      }catch(err){
+        // console.log(err)
       }
-    });
+      events.equalTo("done", false);
+      studentEvents.equalTo("done", false);
+      var mainQuery = Parse.Query.or(events, studentEvents);
+      mainQuery.find().
+        then(
+          function(results){
+            results.forEach(function(result){
+              result.attributes.student.fetch();
+              result.attributes.teacher.fetch();
+            });
+            $scope.tasks = results;
+            console.log(results);
+          },
+          function(err){
+            console.log(err);
+          }
+        )
+    }
+
+    $scope.eventChosen = null;
+
+    $scope.showTaskInfo = function(i){
+      $scope.eventChosen = $scope.tasks[i];
+    }
+
+    $scope.acceptEvent = function(){
+      $scope.eventChosen.set("state","approved");
+      $scope.eventChosen.save().then(
+        function(res){
+          console.log(res);
+          $('#event-info').modal('hide');
+        },
+        function(err){alert(err);}
+      )
+    }
+
+    $scope.refuseEvent = function(){
+      $scope.eventChosen.set("state","refused");
+      $scope.eventChosen.set("done", true);
+      $scope.eventChosen.save().then(
+        function(res){
+          console.log(res);
+          $('#event-info').modal('hide');
+        },
+        function(err){alert(err);}
+      )
+    }
 
 });

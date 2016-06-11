@@ -28,7 +28,7 @@
           <a ng-class="{special: path == '/'}" href="#/" class="button alt fit small">Início</a>
         </li>
         <li>
-          <a ng-class="{special: path == '/explore'}" href="#/explore" class="button alt fit small">Buscar Professores</a>
+          <a ng-class="{special: path == '/explore'}" href="#/explore" class="button alt fit small">Buscar</a>
         </li>
         <li>
           <a ng-class="{special: path == '/classroom'}" href="#/classroom" class="button alt fit small">Sala de Aula</a>
@@ -36,7 +36,7 @@
       </ul>
       <h2 class="form-signin-heading">Bem vindo <span ng-show="session.teacher">professor</span> {{username}}</h2>
 
-      <div class="row">
+      <div class="row uniform">
         <div class="4u 12u$(medium)" ng-hide="editUser">
           <h3>Usuário</h3>
           <ul class="alt">
@@ -82,20 +82,82 @@
             <li><button class="button small fit" ng-click="cancelEdit()">Cancelar</button></li>
           </ul>
         </div>
-        <div class="8u$ 12u$(medium)">
-          <h3>Compromissos</h3>
-          <ul class="alt">
-            <li ng-repeat="task in tasks">
-              Aula - {{task.attributes.student}}
-            </li>
-            <li>Tipo - Descrição completa e geral... <a href="#{{path}}" class="button special small">Ação Positiva</a> <a href="#{{path}}" class="button alt small">Ação Neutra</a>  <a href="#{{path}}" class="button alt small disabled">Ação Negativa</a></li>
-          </ul>
+        <div class="8u 12u$(medium) table-wrapper">
+          <table>
+            <thead><tr><th>Tipo</th><th>Descrição</th><th>Ações</th></tr></thead>
+            <tbody>
+              <tr ng-repeat="task in tasks">
+                <td>Aula <span ng-show="task.attributes.recurrent">Recorrente</span></td>
+                <td>Aula <span ng-show="task.attributes.remote">remota </span>de <span ng-bind="task.attributes.language"/>, na <span ng-bind="task.attributes.dia"/> de <span ng-bind="task.attributes.hora"/></td>
+                <td>
+                  <ul class="icons">
+    								<li ng-show="!(task.attributes.state == 'refused')">
+                      <a class="icon fa-stack fa-lg" ng-show="(task.attributes.state == 'requested')">
+                          <i class="fa fa-square-o fa-stack-2x"></i>
+                          <i class="fa fa-check fa-stack-1x"></i>
+                      </a>
+                      <a class="icon fa-stack fa-lg" ng-show="(task.attributes.state == 'approved')">
+                          <i class="fa fa-square-o fa-stack-2x"></i>
+                          <i class="fa fa-play fa-stack-1x"></i>
+                      </a>
+                    </li>
+    								<li>
+                      <a ng-click="showTaskInfo($index)" class="icon fa-stack fa-lg" data-toggle="modal" data-target="#event-info">
+                          <i class="fa fa-square-o fa-stack-2x"></i>
+                          <i class="fa fa-info fa-stack-1x"></i>
+                      </a>
+                    </li>
+    								<li ng-show="!(task.attributes.state == 'refused')">
+                      <a href="#" class="icon fa-stack fa-lg">
+                          <i class="fa fa-square-o fa-stack-2x"></i>
+                          <i class="fa fa-times fa-stack-1x"></i>
+                      </a>
+                    </li>
+					         </ul>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
       <form class="form-signout">
         <br/><br/>
         <a href="#" class="button fit" type="submit" ng-click="logout()">Sair</a>
       </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="event-info" tabindex="-1" style="z-index:10001">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Aula de {{eventChosen.attributes.language}}</h3>
+      </div>
+      <div class="modal-body">
+        <h4>Tipo:</h4>
+        <p>Aula <span ng-show="eventChosen.attributes.remote">remota </span>de <span ng-bind="eventChosen.attributes.language"/>.</p>
+        <h4>Dia e Horário:</h4>
+        <p>Na <span ng-bind="eventChosen.attributes.dia"/> de <span ng-bind="eventChosen.attributes.hora"/>.</p>
+        <h4>Aluno:</h4>
+        <p>{{eventChosen.attributes.student.attributes.username}}, {{eventChosen.attributes.student.attributes.email}}.</p>
+        <h4>Professor:</h4>
+        <p>{{eventChosen.attributes.teacher.attributes.username}}, {{eventChosen.attributes.teacher.attributes.email}}, que da aula de <span ng-repeat="lang in eventChosen.attributes.teacher.attributes.languages">{{lang}}<span ng-show="!$last">,</span></span>.</p>
+        <h4>Status:</h4>
+        <p>{{eventChosen.attributes.state}}.</p>
+        <h4>Observações:</h4>
+        <p>{{eventChosen.attributes.observations}}.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="button special small fit" ng-click="acceptEvent()" ng-show="eventChosen.attributes.state == 'requested'">Aceitar</button>
+        <button type="button" class="button special small fit" ng-click="acceptEvent()" ng-show="eventChosen.attributes.state == 'approved'">Iniciar</button>
+        <button type="button" class="button small fit" ng-click="refuseEvent()" ng-show="eventChosen.attributes.state != 'refused'">Recusar</button>
+        <button type="button" class="button alt small fit" data-dismiss="modal">Cancelar</button>
+      </div>
     </div>
   </div>
 </div>
