@@ -31,7 +31,7 @@ foodMeApp.controller('ClassroomController',
       // the id/element dom element that will hold "our" video
       localVideoEl: 'localVideo',
       // the id/element dom element that will hold remote videos
-      remoteVideosEl: 'remotesVideos',
+      remoteVideosEl: '',
       // immediately ask for camera access
       autoRequestMedia: true
     });
@@ -42,6 +42,32 @@ foodMeApp.controller('ClassroomController',
       webrtc.joinRoom('your awesome room name');
     });
 
-    
+    $scope.remotesConnected = [];
+
+    webrtc.on('videoAdded', function (video, peer) {
+        console.log('video added', peer);
+        var remotes = document.getElementById('remotesVideos');
+        if (remotes) {
+            var container = document.createElement('div');
+            container.className = 'videoContainer';
+            container.id = 'container_' + webrtc.getDomId(peer);
+            container.appendChild(video);
+
+            $scope.remotesConnected.push(container);
+            var classSize = Math.floor($scope.remotesConnected.length / 12) + "u";
+            $scope.remotesConnected.forEach(function(element){
+              element.className = 'videoContainer' + classSize;
+            })
+
+            console.log("Aqui",$scope.remotesConnected);
+            // suppress contextmenu
+            video.oncontextmenu = function () { return false; };
+
+            remotes.appendChild(container);
+        }
+
+    });
+
+
     console.log("aqui")
 });
