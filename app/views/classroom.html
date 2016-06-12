@@ -1,8 +1,27 @@
 <div class="row-fluid">
   <br/>
   <div class="container">
-    <h3>Sala de Aula</h3>
-    <video height="300" id="localVideo"></video>
-    <div id="remotesVideos"></div>
+    <ul class="actions fit small">
+      <li>
+        <a ng-class="{special: path == '/'}" href="#/" class="button alt fit small">Início</a>
+      </li>
+      <li>
+        <a ng-class="{special: path == '/explore'}" href="#/explore" class="button alt fit small">Buscar</a>
+      </li>
+      <li>
+        <a ng-class="{special: path == '/classroom'}" href="#/classroom" class="button alt fit small">Sala de Aula</a>
+      </li>
+    </ul>
+    <h2 class="form-signin-heading">Sala de aula</h2>
+    <div class="row uniform">
+      <div class="3u 12u$(medium)">
+        <h4>Seu vídeo</h4>
+        <video class="12u" id="localVideo"></video>
+      </div>
+      <div class="9u 12u$(medium)">
+        <h4>Professor</h4>
+        <div class="12u" id="remotesVideos"></div>
+      </div>
+    </div>
   </div>
 </div>
