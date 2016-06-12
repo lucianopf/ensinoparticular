@@ -14,7 +14,7 @@ foodMeApp.config(function($routeProvider) {
         templateUrl: 'views/explore.html'
       }).
       when('/classroom', {
-        controller: 'LoginController',
+        controller: 'ClassroomController',
         templateUrl: 'views/classroom.html'
       }).
       when('/assessments', {

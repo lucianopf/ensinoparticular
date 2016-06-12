@@ -1,45 +1,8 @@
 <div class="row-fluid">
   <br/>
   <div class="container">
-    <div ng-show="logged">
-      <ul class="actions fit small">
-        <li>
-          <a ng-class="{special: path == '/'}" href="#/" class="button alt fit small">Início</a>
-        </li>
-        <li>
-          <a ng-class="{special: path == '/explore'}" href="#/explore" class="button alt fit small">Buscar Professores</a>
-        </li>
-        <li>
-          <a ng-class="{special: path == '/classroom'}" href="#/classroom" class="button alt fit small">Sala de Aula</a>
-        </li>
-      </ul>
-      <div class="row">
-        <div class="4u 12u$(medium)">
-          <h3>Usuário</h3>
-          <ul class="alt">
-            <li>Nome de usuário: {{session.username}}</li>
-            <li>Email do usuário: {{session.email}}</li>
-            <li>Telefone do usuário: {{session.phone}}</li>
-          </ul>
-          <a href="#" class="button special fit small">Alterar Dados</a>
-        </div>
-        <div class="8u$ 12u$(medium)">
-          <h3>Compromissos</h3>
-          <ul class="alt">
-            <li>Tipo - Descrição completa e geral... <a href="#{{path}}" class="button special small">Ação Positiva</a> <a href="#{{path}}" class="button alt small">Ação Neutra</a>  <a href="#{{path}}" class="button alt small disabled">Ação Negativa</a></li>
-            <li>Tipo - Descrição completa e geral... <a href="#{{path}}" class="button special small">Ação Positiva</a> <a href="#{{path}}" class="button alt small">Ação Neutra</a>  <a href="#{{path}}" class="button alt small disabled">Ação Negativa</a></li>
-            <li>Tipo - Descrição completa e geral... <a href="#{{path}}" class="button special small">Ação Positiva</a> <a href="#{{path}}" class="button alt small">Ação Neutra</a>  <a href="#{{path}}" class="button alt small disabled">Ação Negativa</a></li>
-            <li>Tipo - Descrição completa e geral... <a href="#{{path}}" class="button special small">Ação Positiva</a> <a href="#{{path}}" class="button alt small">Ação Neutra</a>  <a href="#{{path}}" class="button alt small disabled">Ação Negativa</a></li>
-            <li>Tipo - Descrição completa e geral... <a href="#{{path}}" class="button special small">Ação Positiva</a> <a href="#{{path}}" class="button alt small">Ação Neutra</a>  <a href="#{{path}}" class="button alt small disabled">Ação Negativa</a></li>
-            <li>Tipo - Descrição completa e geral... <a href="#{{path}}" class="button special small">Ação Positiva</a> <a href="#{{path}}" class="button alt small">Ação Neutra</a>  <a href="#{{path}}" class="button alt small disabled">Ação Negativa</a></li>
-            <li>Tipo - Descrição completa e geral... <a href="#{{path}}" class="button special small">Ação Positiva</a> <a href="#{{path}}" class="button alt small">Ação Neutra</a>  <a href="#{{path}}" class="button alt small disabled">Ação Negativa</a></li>
-          </ul>
-        </div>
-      </div>
-      <form class="form-signout">
-        <br/><br/>
-        <a href="#" class="button fit" type="submit" ng-click="logout()">Sair</a>
-      </form>
-    </div>
+    <h3>Sala de Aula</h3>
+    <video height="300" id="localVideo"></video>
+    <div id="remotesVideos"></div>
   </div>
 </div>
