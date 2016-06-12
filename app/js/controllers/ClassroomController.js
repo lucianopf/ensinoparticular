@@ -54,12 +54,12 @@ foodMeApp.controller('ClassroomController',
             container.appendChild(video);
 
             $scope.remotesConnected.push(container);
-            var classSize = Math.floor($scope.remotesConnected.length / 12) + "u";
+            var classSize = Math.floor(12 / $scope.remotesConnected.length);
             $scope.remotesConnected.forEach(function(element){
-              element.className = 'videoContainer' + classSize;
+              element.className = 'videoContainer ' + classSize + 'u';
             })
 
-            console.log("Aqui",$scope.remotesConnected);
+            console.log(classSize);
             // suppress contextmenu
             video.oncontextmenu = function () { return false; };
 
