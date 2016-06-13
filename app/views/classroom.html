@@ -15,12 +15,26 @@
     <h2 class="form-signin-heading">Sala de aula</h2>
     <div class="row uniform">
       <div class="3u 12u$(medium)">
-        <h4>Seu vídeo</h4>
-        <video class="12u" id="localVideo"></video>
+        <button type="button" class="button alt small fit" ng-click="initVideo()">Iniciar Vídeo</button>
+        <button type="button" class="button alt small fit" ng-click="initTogether()">Iniciar Compartilhamento</button>
+        <div ng-show="videoOn">
+          <h4>Seu vídeo</h4>
+          <video class="12u" id="localVideo"></video>
+        </div>
       </div>
       <div class="9u 12u$(medium)">
-        <h4>Professor</h4>
-        <div class="12u" id="remotesVideos"></div>
+        <div ng-show="videoOn">
+          <h4>Professor</h4>
+          <div class="12u" id="remotesVideos"></div>
+        </div>
+        <div ng-show="togetherOn">
+          <h4>Quadro de desenhos</h4>
+          <div class="demo" id="colors_demo">
+            <div class="tools">
+            </div>
+            <canvas id="colors_sketch" width="800" height="300" style="border: 1px solid gray;"></canvas>
+          </div>
+        </div>
       </div>
     </div>
   </div>
