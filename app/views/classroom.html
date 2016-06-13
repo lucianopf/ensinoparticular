@@ -17,6 +17,8 @@
       <div class="3u 12u$(medium)">
         <button type="button" class="button alt small fit" ng-click="initVideo()">Iniciar Vídeo</button>
         <button type="button" class="button alt small fit" ng-click="initTogether()">Iniciar Compartilhamento</button>
+        <button type="button" class="button alt small fit" data-toggle="modal" data-target="#event-info" ng-click="showInfo()">Mostrar informações</button>
+        <button type="button" class="button small fit" ng-click="finishEvent()">Terminar aula</button>
         <div ng-show="videoOn">
           <h4>Seu vídeo</h4>
           <video class="12u" id="localVideo"></video>
@@ -60,16 +62,38 @@
             <a class="btn btn-default color-picker black-pick upper-button" style="border-bottom-width: 0px;">
               <i class="fa fa-pencil"></i>
             </a>
-
-
           </div>
-
-
-
-
-
-
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="event-info" tabindex="-1" style="z-index:10001">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Aula de {{eventChosen.attributes.language}}</h3>
+      </div>
+      <div class="modal-body">
+        <h4>Tipo:</h4>
+        <p>Aula <span ng-show="eventChosen.attributes.remote">remota </span>de <span ng-bind="eventChosen.attributes.language"/>.</p>
+        <h4>Dia e Horário:</h4>
+        <p>Na <span ng-bind="eventChosen.attributes.dia"/> de <span ng-bind="eventChosen.attributes.hora"/>.</p>
+        <h4>Aluno:</h4>
+        <p>{{eventChosen.attributes.student.attributes.username}}, {{eventChosen.attributes.student.attributes.email}}.</p>
+        <h4>Professor:</h4>
+        <p>{{eventChosen.attributes.teacher.attributes.username}}, {{eventChosen.attributes.teacher.attributes.email}}, que da aula de <span ng-repeat="lang in eventChosen.attributes.teacher.attributes.languages">{{lang}}<span ng-show="!$last">,</span></span>.</p>
+        <h4>Status:</h4>
+        <p>{{eventChosen.attributes.state}}.</p>
+        <h4>Observações:</h4>
+        <p>{{eventChosen.attributes.observations}}.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="button alt small fit" data-dismiss="modal">Cancelar</button>
       </div>
     </div>
   </div>

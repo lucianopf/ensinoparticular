@@ -1,5 +1,5 @@
 foodMeApp.controller('ClassroomController',
-    function ClassroomController($scope, $location, $q, $http) {
+    function ClassroomController($scope, $location, $q, $http, $rootScope) {
 
     $scope.username = "";
     $scope.password = "";
@@ -312,6 +312,19 @@ foodMeApp.controller('ClassroomController',
       });
     });
 
+    $scope.eventChosen = $rootScope.eventStarted;
 
+    $scope.finishEvent = function(){
+      $scope.eventChosen.set('state','done');
+      $scope.eventChosen.set('done', true);
+      $scope.eventChosen.save()
+      .then(function(res){
+        console.log(res);
+        $location.url('/');
+      },
+      function(err){
+        alert(err);
+      });
+    }
 
 });

@@ -1,5 +1,5 @@
 foodMeApp.controller('LoginController',
-    function LoginController($scope, $location, $q, $http) {
+    function LoginController($scope, $location, $q, $http, $rootScope) {
 
     $scope.username = "";
     $scope.password = "";
@@ -407,6 +407,8 @@ foodMeApp.controller('LoginController',
       if(i){
         $scope.showTaskInfo(i);
       }
+      $rootScope.eventStarted = $scope.eventChosen;
+      $location.url('/classroom');
       console.log("start event");
     }
     // console.log(session)
