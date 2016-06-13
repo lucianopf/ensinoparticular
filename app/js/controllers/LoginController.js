@@ -391,7 +391,7 @@ foodMeApp.controller('LoginController',
     }
 
     $scope.refuseEvent = function(i){
-      if(i){
+      if(i || i == 0){
         $scope.showTaskInfo(i);
       }
       $scope.eventChosen.set("state","refused");
@@ -406,12 +406,13 @@ foodMeApp.controller('LoginController',
     }
 
     $scope.startEvent = function(i){
-      if(i){
+      if(i || i == 0){
         $scope.showTaskInfo(i);
       }
       $rootScope.eventStarted = $scope.eventChosen;
       $location.url('/classroom');
-      console.log("start event");
+      $('#event-info').modal('hide');
+      console.log("start event", $rootScope.eventStarted, i);
     }
     // console.log(session)
 });

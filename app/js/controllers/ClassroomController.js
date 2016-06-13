@@ -26,7 +26,7 @@ foodMeApp.controller('ClassroomController',
       $scope.username = session.username;
       $scope.session = session;
     }
-
+    console.log($rootScope.eventStarted);
     $scope.eventChosen = $rootScope.eventStarted;
 
     $scope.finishEvent = function(){
@@ -45,6 +45,7 @@ foodMeApp.controller('ClassroomController',
     $scope.videoOn = false;
 
     $scope.initVideo = function(){
+      console.log($scope.eventChosen.id);
       $scope.videoOn = true;
       var webrtc = new SimpleWebRTC({
         localVideoEl: 'localVideo',
