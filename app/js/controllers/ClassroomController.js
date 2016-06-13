@@ -78,10 +78,10 @@ foodMeApp.controller('ClassroomController',
 
     $(function() {
       $.each(['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f', '#000', '#fff'], function() {
-        $('#colors_demo .tools').append("<a href='#colors_sketch' class='button small' data-color='" + this + "' style='width: 10px; background: " + this + ";'><span style='visibility: hidden'>.</span></a> ");
+        $('#colors_demo .tools').append("<a href='#' class='button small' data-color='" + this + "' style='width: 10px; background: " + this + ";'><span style='visibility: hidden'>.</span></a> ");
       });
       $.each([3, 5, 10, 15], function() {
-        $('#colors_demo .tools').append("<a href='#colors_sketch' class='button small' data-size='" + this + "' style='background: #ccc'>" + this + "</a> ");
+        $('#colors_demo .tools').append("<a href='#' class='button small' data-size='" + this + "' style='background: #ccc'>" + this + "</a> ");
       });
       $('#colors_sketch').sketch();
     });
