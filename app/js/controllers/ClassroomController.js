@@ -68,6 +68,8 @@ foodMeApp.controller('ClassroomController',
       TogetherJS.config("suppressJoinConfirmation", true);
       TogetherJS.config("suppressInvite", true);
       TogetherJS.config("youtube", true);
+      TogetherJS.config("dontShowClicks", true);
+
       TogetherJS.config("getUserName", function(){
         return $scope.username;
       });
