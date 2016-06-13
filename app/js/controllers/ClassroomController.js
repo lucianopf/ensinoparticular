@@ -27,6 +27,21 @@ foodMeApp.controller('ClassroomController',
       $scope.session = session;
     }
 
+    $scope.eventChosen = $rootScope.eventStarted;
+
+    $scope.finishEvent = function(){
+      $scope.eventChosen.set('state','done');
+      $scope.eventChosen.set('done', true);
+      $scope.eventChosen.save()
+      .then(function(res){
+        console.log(res);
+        $location.url('/');
+      },
+      function(err){
+        alert(err);
+      });
+    }
+
     $scope.videoOn = false;
 
     $scope.initVideo = function(){
@@ -37,7 +52,7 @@ foodMeApp.controller('ClassroomController',
         autoRequestMedia: true
       });
       webrtc.on('readyToCall', function () {
-        webrtc.joinRoom('your awesome room name');
+        webrtc.joinRoom('ensinoparticular-' + $scope.eventChosen.id);
       });
       $scope.remotesConnected = 0;
       webrtc.on('videoAdded', function (video, peer) {
@@ -64,7 +79,7 @@ foodMeApp.controller('ClassroomController',
       TogetherJS.config("siteName", "EnsinoParticular");
       TogetherJS.config("toolName", "Compartilhamento");
       TogetherJS.config("cloneClicks", true);
-      TogetherJS.config("findRoom", "ensinoparticular-hash");
+      TogetherJS.config("findRoom", "ensinoparticular-" + $scope.eventChosen.id);
       TogetherJS.config("suppressJoinConfirmation", true);
       TogetherJS.config("suppressInvite", true);
       TogetherJS.config("youtube", true);
@@ -311,20 +326,5 @@ foodMeApp.controller('ClassroomController',
         changeMouse();
       });
     });
-
-    $scope.eventChosen = $rootScope.eventStarted;
-
-    $scope.finishEvent = function(){
-      $scope.eventChosen.set('state','done');
-      $scope.eventChosen.set('done', true);
-      $scope.eventChosen.save()
-      .then(function(res){
-        console.log(res);
-        $location.url('/');
-      },
-      function(err){
-        alert(err);
-      });
-    }
 
 });
