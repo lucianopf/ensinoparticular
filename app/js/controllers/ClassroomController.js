@@ -42,7 +42,7 @@ foodMeApp.controller('ClassroomController',
       webrtc.joinRoom('your awesome room name');
     });
 
-    $scope.remotesConnected = [];
+    $scope.remotesConnected = 0;
 
     webrtc.on('videoAdded', function (video, peer) {
         console.log('video added', peer);
@@ -53,17 +53,15 @@ foodMeApp.controller('ClassroomController',
             container.id = 'container_' + webrtc.getDomId(peer);
             container.appendChild(video);
 
-            $scope.remotesConnected.push(container);
-            var classSize = Math.floor(12 / $scope.remotesConnected.length);
-            $scope.remotesConnected.forEach(function(element){
-              element.className = 'videoContainer ' + classSize + 'u';
-            })
-
-            console.log(classSize);
             // suppress contextmenu
             video.oncontextmenu = function () { return false; };
 
             remotes.appendChild(container);
+
+            var videos = $('.videoContainer').find('video');
+            videos.forEach(function(el){
+              $(el).addClass('12u');
+            })
         }
 
     });
