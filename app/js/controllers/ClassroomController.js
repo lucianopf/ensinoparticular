@@ -59,6 +59,7 @@ foodMeApp.controller('ClassroomController',
             remotes.appendChild(container);
 
             $('.videoContainer').find('video').addClass('12u');
+            $('.videoContainer').find('video').attr('controls',true)
         }
 
     });
