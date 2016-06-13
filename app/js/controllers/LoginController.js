@@ -352,6 +352,8 @@ foodMeApp.controller('LoginController',
       events.equalTo("done", false);
       studentEvents.equalTo("done", false);
       var mainQuery = Parse.Query.or(events, studentEvents);
+
+      mainQuery.descending("createdAt");
       mainQuery.find().
         then(
           function(results){
