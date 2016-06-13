@@ -78,22 +78,9 @@ foodMeApp.controller('ClassroomController',
       return false;
     }
 
-    $(function() {
-      $.each(['#f00', '#ff0', '#0f0', '#0ff', '#00f', '#f0f', '#000', '#fff'], function() {
-        $('#colors_demo .tools').append("<a class='button small' data-color='" + this + "' style='width: 10px; background: " + this + ";'><span style='visibility: hidden'>.</span></a> ");
-      });
-      $.each([3, 5, 10, 15], function() {
-        $('#colors_demo .tools').append("<a class='button small' data-size='" + this + "' style='background: #ccc'>" + this + "</a> ");
-      });
-      $('#colors_sketch').sketch();
-    });
-
-
-
     // get the canvas element and its context
     var canvas = document.getElementById('sketch');
     var context = canvas.getContext('2d');
-
     // the aspect ratio is always based on 1140x400, height is calculated from width:
     canvas.width = $('#sketchContainer').outerWidth();
     canvas.height = (canvas.width/1140)*400;
@@ -107,7 +94,6 @@ foodMeApp.controller('ClassroomController',
       x: 0,
       y: 0
     };
-
     // brush settings
     context.lineWidth = 2;
     context.lineJoin = 'round';
